@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f8f2">
+    <title>GreenPulse — Everyday impact, made visible</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="GreenPulse home">
+          <span class="brand-mark" aria-hidden="true">g</span>
+          <span>greenpulse<span class="brand-dot">.</span></span>
+        </a>
+        <span class="topbar-note"><span class="status-dot"></span> Small steps. Real impact.</span>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL IMPACT TRACKER</p>
+            <h1>Live a little<br> <span>lighter.</span></h1>
+            <p class="hero-description">Everyday choices add up. Track your footprint, find your patterns, and make your next step count.</p>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="sun"></div>
+            <div class="leaf leaf-one"></div>
+            <div class="leaf leaf-two"></div>
+            <div class="hero-art-label">A better<br>kind of progress<span>↗</span></div>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Your impact overview">
+          <article class="stat-card stat-primary">
+            <div class="stat-top"><span>Total footprint</span><span class="stat-icon">↗</span></div>
+            <p class="stat-value"><span id="total-emissions">0.00</span><small>kg CO₂e</small></p>
+            <p class="stat-caption">Your logged estimated emissions</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Activities tracked</span><span class="stat-icon stat-icon-soft">✳</span></div>
+            <p class="stat-value"><span id="activity-count">0</span><small>entries</small></p>
+            <p class="stat-caption">Every entry builds awareness</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Average per activity</span><span class="stat-icon stat-icon-soft">⌁</span></div>
+            <p class="stat-value"><span id="average-emissions">0.00</span><small>kg CO₂e</small></p>
+            <p class="stat-caption">Across your logged activities</p>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel form-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">MAKE IT COUNT</p>
+                <h2>Log an activity</h2>
+              </div>
+              <span class="heading-sparkle" aria-hidden="true">✳</span>
+            </div>
+            <p class="section-description">Add a daily activity and get a quick estimate of its impact.</p>
+
+            <form id="activity-form">
+              <label for="description">What did you do?</label>
+              <input id="description" name="description" type="text" maxlength="120" placeholder="e.g. Commute to work" required>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="category">Activity type</label>
+                  <div class="select-wrap">
+                    <select id="category" name="category" required>
+                      {% for key, category in categories.items() %}
+                      <option value="{{ key }}">{{ category.icon }} &nbsp; {{ category.label }}</option>
+                      {% endfor %}
+                    </select>
+                    <span class="select-chevron" aria-hidden="true">⌄</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="amount">Amount <span id="unit-label">(kWh)</span></label>
+                  <input id="amount" name="amount" type="number" min="0.01" step="any" placeholder="0" required>
+                </div>
+              </div>
+              <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+              <button class="button button-primary" type="submit">
+                <span>Add to my log</span><span class="button-arrow" aria-hidden="true">↗</span>
+              </button>
+            </form>
+            <p class="form-footnote"><span aria-hidden="true">✦</span> Estimates are a guide, not a judgment.</p>
+          </article>
+
+          <article class="panel activity-panel">
+            <div class="section-heading activity-heading">
+              <div>
+                <p class="eyebrow">YOUR JOURNEY</p>
+                <h2>Recent activity</h2>
+              </div>
+              <span class="activity-count" id="recent-count">0 entries</span>
+            </div>
+            <div id="activity-list" class="activity-list" aria-live="polite">
+              <div class="empty-state">
+                <span class="empty-icon" aria-hidden="true">✳</span>
+                <h3>Your story starts here</h3>
+                <p>Log your first activity to see your impact take shape.</p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <aside class="bottom-note">
+          <span class="bottom-note-icon" aria-hidden="true">✦</span>
+          <p><strong>Progress, not perfection.</strong> Awareness is the first step toward a lighter footprint.</p>
+          <span class="bottom-note-leaf" aria-hidden="true">↗</span>
+        </aside>
+      </main>
+
+      <footer><span>greenpulse<span class="brand-dot">.</span></span><span>Made for a brighter everyday.</span></footer>
+    </div>
+  </body>
+</html>
